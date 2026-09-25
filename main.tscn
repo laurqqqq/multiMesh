@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dor0qyxprxkx"]
+
+[ext_resource type="Script" uid="uid://evib6i1ruvgc" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://chyuujc5blos2" path="res://multi_mesh.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://deieceldv5p3a" path="res://player/player.tscn" id="2_h2yge"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2l5gv"]
+size = Vector2(100, 100)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h2yge"]
+points = PackedVector3Array(-50, 0, -50, -50, 0, 50, 50, 0, -50, 50, 0, 50)
+
+[node name="main" type="Node3D" unique_id=595591386]
+script = ExtResource("1_0xm2m")
+
+[node name="player" parent="." unique_id=1579466530 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5149646, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1499082441]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1487875684]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 79.429214, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1842825764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -41.15069, 0)
+mesh = SubResource("PlaneMesh_2l5gv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=191972722]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=561815196]
+shape = SubResource("ConvexPolygonShape3D_h2yge")
+
+[node name="Label" type="Label" parent="." unique_id=908736051]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="." unique_id=27617027]
+
+[node name="MultiMesh" type="Node3D" parent="." unique_id=1229377190]
+script = ExtResource("2_0xm2m")

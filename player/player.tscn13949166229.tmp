@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://deieceldv5p3a"]
+
+[ext_resource type="Script" uid="uid://ddab6ahaywniq" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="PackedScene" uid="uid://chjrhhjvxun3r" path="res://player/simple_gun/gun_model.glb" id="2_rkbax"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kqu6x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
+
+[node name="player" type="CharacterBody3D"]
+script = ExtResource("1_oul6g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_kqu6x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_oul6g")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5872455, -0.25976884)
+
+[node name="gun_model" parent="Camera" instance=ExtResource("2_rkbax")]
+transform = Transform3D(-0.4, 6.1141934e-15, -3.4969112e-08, 0, 0.4, 6.9938224e-08, 3.4969112e-08, 6.9938224e-08, -0.4, 0.55773413, -0.2929039, -0.5071997)
