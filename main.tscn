@@ -4,16 +4,16 @@
 [ext_resource type="Script" uid="uid://chyuujc5blos2" path="res://multi_mesh.gd" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://deieceldv5p3a" path="res://player/player.tscn" id="2_h2yge"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_0xm2m"]
-sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+[sub_resource type="Sky" id="Sky_1bvp3"]
+sky_material = SubResource("ProceduralSkyMaterial_h2yge")
 
-[sub_resource type="Environment" id="Environment_h2yge"]
+[sub_resource type="Environment" id="Environment_lquwl"]
 background_mode = 2
-sky = SubResource("Sky_0xm2m")
+sky = SubResource("Sky_1bvp3")
 glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2l5gv"]
@@ -22,21 +22,39 @@ size = Vector2(100, 100)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h2yge"]
 points = PackedVector3Array(-50, 0, -50, -50, 0, 50, 50, 0, -50, 50, 0, 50)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.16219258, 2.2525192e-05, 0.63529617, 1)
+emission = Color(0.98716074, 0, 0.13452601, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2l5gv"]
+material = SubResource("StandardMaterial3D_h2yge")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_color = Color(1, 0, 0, 1)
+metallic_specular = 0.25
+roughness = 0.15
+emission_enabled = true
+emission = Color(0.98704654, 0, 0.13311684, 1)
+emission_energy_multiplier = 8.1
+backlight = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+material = SubResource("StandardMaterial3D_1bvp3")
+
 [node name="main" type="Node3D" unique_id=595591386]
 script = ExtResource("1_0xm2m")
 
-[node name="player" parent="." unique_id=1579466530 instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5149646, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1315994767]
+environment = SubResource("Environment_lquwl")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1499082441]
-environment = SubResource("Environment_h2yge")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1487875684]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 79.429214, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=272534610]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
+[node name="player" parent="." unique_id=1579466530 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0083137, 27.43332)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1842825764]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -41.15069, 0)
 mesh = SubResource("PlaneMesh_2l5gv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=191972722]
@@ -52,3 +70,15 @@ offset_bottom = 23.0
 
 [node name="MultiMesh" type="Node3D" parent="." unique_id=1229377190]
 script = ExtResource("2_0xm2m")
+
+[node name="cube" type="MeshInstance3D" parent="." unique_id=1512854413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.447891, 0)
+visible = false
+mesh = SubResource("BoxMesh_2l5gv")
+
+[node name="cube2" type="MeshInstance3D" parent="." unique_id=176410320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.447891, 0)
+visible = false
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="MultiMeshInstance3D2" type="MultiMeshInstance3D" parent="." unique_id=2077726238]

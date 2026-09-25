@@ -1,6 +1,6 @@
+MultiMeshInstance3D
+MeshInstance3D
 CollisionShape3D
 Node3D
-MultiMeshInstance3D
 Label
 Camera3D
-MeshInstance3D
